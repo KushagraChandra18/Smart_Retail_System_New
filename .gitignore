@@ -3,4 +3,4 @@ __pycache__/
 *.pyc
 .env
 app.log
-app/ml/*.pkl
+#app/ml/*.pkl
