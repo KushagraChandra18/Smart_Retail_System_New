@@ -101,13 +101,47 @@
 # azure-identity
 # pyspark
 
+# fastapi
+# uvicorn
+# gunicorn
+# pandas
+# numpy
+# scikit-learn
+# pymongo
+# python-dotenv
+# requests
+# python-multipart
+# azure-ai-textanalytics
+# openai
+# azure-ai-projects
+# azure-identity
+
 fastapi
 uvicorn
 gunicorn
-pandas
-numpy
-scikit-learn
 pymongo
 python-dotenv
+pydantic
 requests
+numpy
+pandas
+scikit-learn
+joblib
+xgboost
 python-multipart
+
+azure-ai-documentintelligence
+azure-ai-textanalytics
+openai
+azure-ai-inference
+azure-ai-projects
+azure-identity
+
+groq
+langchain
+langchain-community
+langchain-groq
+faiss-cpu
+sentence-transformers
+pytest
+httpx

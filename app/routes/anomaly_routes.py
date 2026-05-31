@@ -4,17 +4,10 @@ import joblib
 
 router = APIRouter()
 
-# -----------------------------------
-# LOAD ANOMALY MODEL
-# -----------------------------------
-
 model = joblib.load(
     "app/ml/anomaly_detection_model.pkl"
 )
 
-# -----------------------------------
-# LOAD DATASETS
-# -----------------------------------
 
 train_df = pd.read_csv("app/ml/train.csv")
 
@@ -22,9 +15,6 @@ features_df = pd.read_csv("app/ml/features.csv")
 
 stores_df = pd.read_csv("app/ml/stores.csv")
 
-# -----------------------------------
-# MERGE DATASETS
-# -----------------------------------
 
 df = train_df.merge(
     features_df,
@@ -38,15 +28,7 @@ df = df.merge(
     how="left"
 )
 
-# -----------------------------------
-# CLEANING
-# -----------------------------------
-
 df.fillna(0, inplace=True)
-
-# -----------------------------------
-# FEATURE ENGINEERING
-# -----------------------------------
 
 df["Date"] = pd.to_datetime(df["Date"])
 
@@ -54,16 +36,12 @@ df["Month"] = df["Date"].dt.month
 
 df["Week"] = df["Date"].dt.isocalendar().week.astype(int)
 
-# Encode store type
+
 df["Type"] = df["Type"].map({
     "A": 1,
     "B": 2,
     "C": 3
 })
-
-# -----------------------------------
-# FEATURES
-# -----------------------------------
 
 features = [
     "Store",
@@ -80,10 +58,6 @@ features = [
 
 X = df[features]
 
-# -----------------------------------
-# PREDICT ANOMALIES
-# -----------------------------------
-
 predictions = model.predict(X)
 
 df["Anomaly"] = predictions
@@ -96,10 +70,6 @@ df["Anomaly"] = df["Anomaly"].map({
     1: 0,
     -1: 1
 })
-
-# -----------------------------------
-# API 1 - GET ALL ANOMALIES
-# -----------------------------------
 
 @router.get("/detect-anomalies")
 def detect_anomalies():
@@ -131,10 +101,6 @@ def detect_anomalies():
             status_code=500,
             detail=str(e)
         )
-
-# -----------------------------------
-# API 2 - STORE SPECIFIC ANOMALIES
-# -----------------------------------
 
 @router.get("/detect-anomalies/{store_id}")
 def detect_store_anomalies(store_id: int):

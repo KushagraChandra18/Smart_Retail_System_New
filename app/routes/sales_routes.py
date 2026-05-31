@@ -7,10 +7,6 @@ from app.utils.logger import logger
 
 router = APIRouter()
 
-# -----------------------------------
-# API 1 - DATA INGESTION
-# -----------------------------------
-
 @router.post("/upload-sales")
 def upload_sales(data: SalesData):
 
@@ -39,10 +35,6 @@ def upload_sales(data: SalesData):
             status_code=500,
             detail=f"Error uploading sales data: {str(e)}"
         )
-
-# -----------------------------------
-# API 2 - ENTERPRISE DEMAND FORECAST
-# -----------------------------------
 
 @router.get("/forecast")
 def forecast(

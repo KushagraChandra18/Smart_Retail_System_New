@@ -1,17 +1,9 @@
 import joblib
 import pandas as pd
 
-# -----------------------------------
-# LOAD TRAINED MODEL
-# -----------------------------------
-
 model = joblib.load(
     "app/ml/demand_forecast_model.pkl"
 )
-
-# -----------------------------------
-# PREDICTION FUNCTION
-# -----------------------------------
 
 def predict_sales(
     store,
@@ -31,10 +23,7 @@ def predict_sales(
     ema_4
 ):
 
-    # -----------------------------------
-    # CREATE INPUT DATAFRAME
-    # -----------------------------------
-
+    
     input_data = pd.DataFrame([{
 
         "Store": store,
@@ -101,9 +90,7 @@ def predict_sales(
         "Sales_Trend": 1.05
     }])
 
-    # -----------------------------------
-    # PREDICT
-    # -----------------------------------
+
 
     prediction = model.predict(input_data)
 
